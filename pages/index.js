@@ -1,65 +1,134 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import AppBar from '@material-ui/core/AppBar'
+import Badge from '@material-ui/core/Badge'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import { makeStyles } from '@material-ui/core/styles'
+import Toolbar from '@material-ui/core/Toolbar'
+import MenuIcon from '@material-ui/icons/Menu'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCartOutlined'
+import { useCallback, useState } from 'react'
+import { animated, useSpring, useTransition } from 'react-spring'
+import { useGesture } from 'react-use-gesture'
+import AboutUs from '../components/AboutUs'
+import ChickenPlov from '../components/ChickenPlov'
+import Logo from '../components/Logo'
+import NomadsJoy from '../components/NomadsJoy'
+import ScrollIndicator from '../components/ScrollIndicator'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+  },
+  container: {
+    height: '100vh',
+  },
+  appBarSpacer: {
+    flexGrow: 1,
+  },
+  video: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    'object-fit': 'cover',
+    zIndex: -999,
+    height: '100%',
+    width: '100%',
+  },
+  videoOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '100%',
+    width: '100%',
+    zIndex: -998,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+}))
+
+const screens = [
+  animated(NomadsJoy),
+  animated(ChickenPlov),
+  animated(AboutUs),
+]
 
 export default function Home() {
+  const [ { screenIndex, direction }, setScreen ] = useState({ screenIndex: 0, direction: true })
+  const classes = useStyles()
+
+  const turnScreen = (direction = true) => {
+    const step = (direction ? 1 : 2)
+    setScreen(({ screenIndex }) => ({
+      screenIndex: (screenIndex + step) % 3,
+      direction
+    }))
+  }
+
+  const projection = velocity => (velocity * 0.998) / (1 - 0.998)
+
+  const bind = useGesture({
+    onDragEnd: (({ movement: [ x, y ] }) => {
+      if (Math.abs(y) > 150) {
+        turnScreen(y < 0)
+      }
+    }),
+    onWheelStart: ({ ctrlKey, direction: [ x, y ], ...rest }) => {
+      if (!ctrlKey) {
+        turnScreen(y > 0)
+      }
+    },
+  })
+
+  const transitions = useTransition(screenIndex, (p) => p, {
+    from: { opacity: 0, transform: `translate3d(0,${direction?'100%':'-100%'},0)` },
+    enter: [
+      { opacity: 0, transform: `translate3d(0,${direction?'90%':'-90%'},0)` },
+      { opacity: 1, transform: `translate3d(0,0,0)` },
+    ],
+    leave: { opacity: 0, transform: `translate3d(0,${direction?'-50%':'50%'},0)` },
+  })
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className={classes.root}>
+      <AppBar position="fixed" color="transparent" elevation={0}>
+        <Toolbar>
+          <IconButton edge="start" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <div className={classes.appBarSpacer}> </div>
+          <IconButton aria-label="shopping cart">
+            <Badge badgeContent={2} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </Toolbar>
+      </AppBar>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Grid container
+            justify="center"
+            alignItems="center"
+            className={classes.container}
+            {...bind()}>
+        {
+        transitions.map(({ item, props, key }) => {
+          const Screen = screens[item]
+          return (
+            <Screen key={key} style={props} />
+          )
+          })
+        }
+        {
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        }
+        <ScrollIndicator />
+      </Grid>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+      <video autoPlay={true} playsInline={true} loop={true} muted={true} className={classes.video}>
+        <source src="/media/pilaf-1080p.webm" type="video/webm" />
+        <source src="/media/pilaf-1080p.mp4" type="video/mp4" />
+        <source src="/media/pilaf-1080p.flv" type="video/flv" />
+        <source src="/media/pilaf-1080p.ogg" type="video/ogg" />
+      </video>
+      <div className={classes.videoOverlay}> </div>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
