@@ -8,24 +8,33 @@ const theme = createMuiTheme({
       root: {
         height: '1.5rem',
         width: '1.5rem',
-        color: 'white',
+        color: '#FFFFFF',
       },
     },
   },
   palette: {
     primary: {
-      main: '#fff',
+      light: '#ffc947',
+      main: '#ff9800',
+      dark: '#c66900',
+      contrastText: '#000000',
     },
-    secondary: {
-      main: '#ff0000',
-    },
+    // secondary: {
+    //   light: '#cfff95',
+    //   main: '#9ccc65',
+    //   dark: '#6b9b37',
+    //   contrastText: '#000000',
+    // },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#FFFFFF',
     },
-    divider: '#fff',
+    divider: '#FFFFFF',
+    text: {
+      primary: '#FFFFFF',
+    },
   },
   typography: {
     body1: {

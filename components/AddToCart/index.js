@@ -5,17 +5,18 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginTop: '8px',
   },
-  // outlinedPrimary: {
-  //   boxShadow: '0px 0px 10px rgba(0,0,0,1)',
-  // },
-  // label: {
-  //   textShadow: '0px 0px 10px rgba(0,0,0,1)',
-  // },
+  outlined: {
+    color: theme.palette.text.primary,
+    borderColor: `rgba(255,255,255,0.5)`,
+    '&:hover': {
+      borderColor: theme.palette.text.primary,
+    },
+  },
 }))
 
 export default function AddToCart() {
   const classes = useStyles()
   return (
-    <Button variant="outlined" color="primary" classes={classes}>Add to cart</Button>
+      <Button variant="outlined" classes={classes}>Add to cart</Button>
   )
 }

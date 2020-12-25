@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     padding: '16px',
     height: '100%',
     width: '100%',
-    backgroundColor: 'orange',
+    backgroundColor: theme.palette.primary.main,
   },
   divider: {
     width: '50%',
