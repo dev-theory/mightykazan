@@ -42,11 +42,10 @@ export default function SplashScreen(props) {
     to: { opacity: props.display ? 1 : 0 },
     onRest: () => setDisplay(props.display)
   })
-  const propsX = useSpring({ x: 100, from: { x: 0 } })
-  return display ? (
+  return display && (
     <animated.div className={classes.root} style={styleProps}>
       <img className={classes.img} src="/images/mightykazan-logo-brand-white.png" />
       <LinearProgress classes={{ root: classes.progress, barColorPrimary: classes.progressBarColorPrimary }} />
     </animated.div>
-  ) : (<></>)
+  )
 }
