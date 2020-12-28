@@ -11,7 +11,7 @@ import { animated, useTransition } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import AboutUs from '../components/AboutUs'
 import ChickenPlov from '../components/ChickenPlov'
-import Logo from '../components/Logo'
+import Menu from '../components/Menu'
 import NomadsJoy from '../components/NomadsJoy'
 import ScrollIndicator from '../components/ScrollIndicator'
 import SplashScreen from '../components/SplashScreen'
@@ -56,6 +56,10 @@ export default function Home(props) {
   const [ { sectionIndex, direction }, setSection ] = useState({ sectionIndex: 0, direction: true })
   const [ isVideoLoaded, setVideoLoaded ] = useState(false)
 
+  const [ isMenuOpen, setMenuOpen ] = useState(false)
+  const handleMenuClose = () => setMenuOpen(false)
+  const toggleMenu = () => setMenuOpen(!isMenuOpen)
+
   const goToSection = (direction = true) => {
     const step = (direction ? 1 : 2)
     setSection(({ sectionIndex }) => ({
@@ -92,7 +96,7 @@ export default function Home(props) {
     <div className={classes.root}>
       <AppBar position="fixed" color="transparent" elevation={0}>
         <Toolbar>
-          <IconButton edge="start" aria-label="menu">
+          <IconButton edge="start" aria-label="menu" onClick={toggleMenu}>
             <MenuIcon />
           </IconButton>
           <div className={classes.appBarSpacer}> </div>
@@ -103,6 +107,8 @@ export default function Home(props) {
           </IconButton>
         </Toolbar>
       </AppBar>
+
+      <Menu open={isMenuOpen} onMenuItemClick={setSection} onMenuClose={handleMenuClose} />
 
       <Grid container
             justify="center"

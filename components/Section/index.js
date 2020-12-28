@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
   },
+  addonLabel: {
+    whiteSpace: 'nowrap',
+  },
   container: {
     top: 0,
     left: 0,
@@ -72,8 +75,12 @@ export default function Section(props) {
           <Typography variant="body1">Serving size - {props.servingSize}</Typography>
           <FormGroup row classes={{ root: classes.formGroup }}>
             <FormControlLabel
-              control={<Checkbox checked={salad} onChange={handleSalad} name="addSalad" />}
+              control={<Checkbox
+                           checked={salad}
+                           onChange={handleSalad}
+                           name="addSalad" />}
               label="Add tomato barberry salad $2.99"
+              classes={{ label: classes.addonLabel }}
               />
           </FormGroup>
           <FormGroup row classes={{ root: classes.formGroup }}>

@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 
@@ -48,4 +49,8 @@ export default function SplashScreen(props) {
       <LinearProgress classes={{ root: classes.progress, barColorPrimary: classes.progressBarColorPrimary }} />
     </animated.div>
   )
+}
+
+SplashScreen.propTypes = {
+  display: PropTypes.bool.isRequired,
 }
