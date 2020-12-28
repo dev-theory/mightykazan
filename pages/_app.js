@@ -18,7 +18,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Mighty Kazan - Nomadic food</title>
+        <title>Mighty Kazan - Nomadic food of Central Asia</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
