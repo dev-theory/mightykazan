@@ -34,11 +34,12 @@ const useStyles = makeStyles(theme => ({
   },
   divider: {
     width: '150px',
-    margin: '1rem auto',
+    margin: '0.7rem auto',
   },
   logo: {
     userSelect: 'none',
     width: '200px',
+    margin: '0 auto 1rem auto',
   },
   menuItem :{
     width: '100%',
@@ -64,7 +65,9 @@ export default function Menu(props) {
           <img className={classes.logo} src="/images/mightykazan-logo-brand-white.png" />
           <Divider className={classes.divider} />
           <MenuItem className={classes.menuItem} onClick={navigateToNomadsJoy}>Nomad's Joy</MenuItem>
+          <Divider className={classes.divider} />
           <MenuItem className={classes.menuItem} onClick={navigateToChickenPlov}>Chick-n-Grains</MenuItem>
+          <Divider className={classes.divider} />
           <MenuItem className={classes.menuItem} onClick={navigateToAboutUs}>About Us</MenuItem>
         </div>
         <div className={classes.footer}>
