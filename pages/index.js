@@ -4,12 +4,13 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
 import Toolbar from '@material-ui/core/Toolbar'
+import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCartOutlined'
 import { useCallback, useState } from 'react'
 import { animated, useTransition } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
-import AboutUs from '../components/AboutUs'
+import About from '../components/About'
 import ChickenPlov from '../components/ChickenPlov'
 import Menu from '../components/Menu'
 import NomadsJoy from '../components/NomadsJoy'
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 const sections = [
   animated(NomadsJoy),
   animated(ChickenPlov),
-  animated(AboutUs),
+  animated(About),
 ]
 
 export default function Home(props) {
@@ -61,9 +62,9 @@ export default function Home(props) {
   const toggleMenu = () => setMenuOpen(!isMenuOpen)
 
   const goToSection = (direction = true) => {
-    const step = (direction ? 1 : 2)
+    const step = (direction ? 1 : (sections.length-1))
     setSection(({ sectionIndex }) => ({
-      sectionIndex: (sectionIndex + step) % 3,
+      sectionIndex: (sectionIndex + step) % sections.length,
       direction
     }))
   }
@@ -72,7 +73,7 @@ export default function Home(props) {
 
   const bind = useGesture({
     onDragEnd: (({ movement: [ x, y ] }) => {
-      if (Math.abs(y) > 150) {
+      if (Math.abs(y) > 100) {
         goToSection(y < 0)
       }
     }),
@@ -97,7 +98,7 @@ export default function Home(props) {
       <AppBar position="fixed" color="transparent" elevation={0}>
         <Toolbar>
           <IconButton edge="start" aria-label="menu" onClick={toggleMenu}>
-            <MenuIcon />
+            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <div className={classes.appBarSpacer}> </div>
           <IconButton aria-label="shopping cart">

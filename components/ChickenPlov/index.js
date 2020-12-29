@@ -19,8 +19,8 @@ export default function ChickenPlov(props) {
     id: 'item-2',
     title: 'Chick-n-',
     title2: 'Grains',
-    description: <>This amazing chicken <em><strong>plov</strong></em> is prepared on the firewood according to authentic traditions in a cast iron <em><strong>kazan</strong></em> with <em><strong>quality</strong></em> rice, carrots and tender boneless chicken meat</>,
+    description: <>This amazing Chicken <em><strong>Plov</strong></em> is prepared with firewood according to authentic traditions in a cast iron <em><strong>"Kazan"</strong></em> with <em><strong>quality</strong></em> rice, carrots and tender boneless chicken meat</>,
     price: 13.99,
-    servingSize: '350g',
+    servingSize: '400g',
   })
 }

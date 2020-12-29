@@ -38,11 +38,12 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     userSelect: 'none',
-    width: '200px',
+    width: '160px',
     margin: '0 auto 1rem auto',
   },
   menuItem :{
     width: '100%',
+    fontSize: '2em',
     justifyContent: 'center',
   },
   footer: {
@@ -57,7 +58,7 @@ export default function Menu(props) {
   }
   const navigateToNomadsJoy = () => navigateTo(0)
   const navigateToChickenPlov = () => navigateTo(1)
-  const navigateToAboutUs = () => navigateTo(2)
+  const navigateToAbout = () => navigateTo(2)
   return (
     <Slide in={props.open} direction="right">
       <div className={classes.root}>
@@ -68,7 +69,7 @@ export default function Menu(props) {
           <Divider className={classes.divider} />
           <MenuItem className={classes.menuItem} onClick={navigateToChickenPlov}>Chick-n-Grains</MenuItem>
           <Divider className={classes.divider} />
-          <MenuItem className={classes.menuItem} onClick={navigateToAboutUs}>About Us</MenuItem>
+          <MenuItem className={classes.menuItem} onClick={navigateToAbout}>About</MenuItem>
         </div>
         <div className={classes.footer}>
         <Typography variant="subtitle2">© {new Date().getFullYear()} Mighty Kazan</Typography>
