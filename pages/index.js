@@ -1,18 +1,11 @@
-import AppBar from '@material-ui/core/AppBar'
-import Badge from '@material-ui/core/Badge'
 import Grid from '@material-ui/core/Grid'
-import IconButton from '@material-ui/core/IconButton'
 import { makeStyles } from '@material-ui/core/styles'
-import Toolbar from '@material-ui/core/Toolbar'
-import CloseIcon from '@material-ui/icons/Close'
-import MenuIcon from '@material-ui/icons/Menu'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCartOutlined'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { animated, useTransition } from 'react-spring'
 import { useGesture } from 'react-use-gesture'
 import About from '../components/About'
+import AppBar from '../components/AppBar'
 import ChickenPlov from '../components/ChickenPlov'
-import Menu from '../components/Menu'
 import NomadsJoy from '../components/NomadsJoy'
 import ScrollIndicator from '../components/ScrollIndicator'
 import SplashScreen from '../components/SplashScreen'
@@ -22,9 +15,6 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     height: '100vh',
-  },
-  appBarSpacer: {
-    flexGrow: 1,
   },
   video: {
     position: 'absolute',
@@ -57,10 +47,6 @@ export default function Home(props) {
   const [ { sectionIndex, direction }, setSection ] = useState({ sectionIndex: 0, direction: true })
   const [ isVideoLoaded, setVideoLoaded ] = useState(false)
 
-  const [ isMenuOpen, setMenuOpen ] = useState(false)
-  const handleMenuClose = () => setMenuOpen(false)
-  const toggleMenu = () => setMenuOpen(!isMenuOpen)
-
   const goToSection = (direction = true) => {
     const step = (direction ? 1 : (sections.length-1))
     setSection(({ sectionIndex }) => ({
@@ -68,8 +54,6 @@ export default function Home(props) {
       direction
     }))
   }
-
-  const projection = velocity => (velocity * 0.998) / (1 - 0.998)
 
   const bind = useGesture({
     onDragEnd: (({ movement: [ x, y ] }) => {
@@ -95,21 +79,7 @@ export default function Home(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" color="transparent" elevation={0}>
-        <Toolbar>
-          <IconButton edge="start" aria-label="menu" onClick={toggleMenu}>
-            {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </IconButton>
-          <div className={classes.appBarSpacer}> </div>
-          <IconButton aria-label="shopping cart">
-            <Badge badgeContent={2} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      <Menu open={isMenuOpen} onMenuItemClick={setSection} onMenuClose={handleMenuClose} />
+      <AppBar onMenuItemClick={setSection} />
 
       <Grid container
             justify="center"

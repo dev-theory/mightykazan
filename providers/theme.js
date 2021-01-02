@@ -4,11 +4,30 @@ import { red } from '@material-ui/core/colors';
 // Create a theme instance.
 const theme = createMuiTheme({
   overrides: {
+    MuiButton: {
+      outlined: {
+        color: '#FFFFFF',
+        borderColor: `rgba(255,255,255,0.5)`,
+        '&:hover': {
+          borderColor: '#FFFFFF',
+        },
+      },
+    },
     MuiSvgIcon: {
       root: {
         height: '1.5rem',
         width: '1.5rem',
         color: '#FFFFFF',
+      },
+    },
+    MuiTooltip: {
+      tooltip: {
+        fontSize: '1.1rem',
+        border: '1px solid rgba(255,255,255,0.5)',
+        backgroundColor: 'rgba(0,0,0,0.3)'
+      },
+      arrow: {
+        color: 'rgba(255,255,255,0.9)',
       },
     },
   },

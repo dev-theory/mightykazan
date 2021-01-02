@@ -1,0 +1,28 @@
+{
+  "1": {
+    "id": "1",
+    "name": "Nomad's Joy",
+    "description": "Treat yourself to the authentic <em><strong>\"Plov\"</strong></em> of nomads prepared with firewood in a cast iron <em><strong>\"Kazan\"</strong></em> with <em><strong>quality</strong></em> rice, carrots and lamb melting in your mouth",
+    "price": 13.99,
+    "servingSize": "400g"
+  },
+  "2": {
+    "id": "2",
+    "name": "Chick-n-Grains",
+    "description": "This amazing Chicken <em><strong>Plov</strong></em> is prepared with firewood according to authentic traditions in a cast iron <em><strong>\"Kazan\"</strong></em> with <em><strong>quality</strong></em> rice, carrots and tender boneless chicken meat",
+    "price": 13.99,
+    "servingSize": "400g"
+  },
+  "3": {
+    "id": "3",
+    "name": "Tomato barberry salad",
+    "description": "Tomato barberry and red onion salad.",
+    "price": 2.99
+  },
+  "4": {
+    "id": "4",
+    "name": "Flaky meat pocket",
+    "description": "Flaky meat pocket",
+    "price": 4.99
+  }
+}
