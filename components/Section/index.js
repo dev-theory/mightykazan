@@ -17,6 +17,7 @@ import { useStyles } from './styles'
 export default function Section(props) {
   const classes = useStyles(props)
   const dispatch = useDispatch()
+  const item = useSelector(state => itemByIdSelector(state, props.id))
   const itemSalad = useSelector(state => itemByIdSelector(state, '3'))
   const itemMeatPocket = useSelector(state => itemByIdSelector(state, '4'))
   const [ salad, setSalad ] = useState(false)
@@ -50,7 +51,7 @@ export default function Section(props) {
           <Divider className={classes.divider} />
           <Typography variant="body1">{props.description}</Typography>
           <Divider className={classes.divider} />
-          <Typography variant="body1" className={classes.price}>${props.price} <Typography component="span" variant="body2">{props.currency ? props.currency : 'CAD'}</Typography></Typography>
+          <Typography variant="body1" className={classes.price}>${item.price} <Typography component="span" variant="body2">{item.currency ? item.currency : 'CAD'}</Typography></Typography>
           <FormGroup row classes={{ root: classes.formGroup }}>
             <FormControlLabel
               control={<Checkbox
@@ -85,11 +86,11 @@ export default function Section(props) {
 }
 
 Section.propTypes = {
-  id: PropTypes.string.required,
-  title: PropTypes.string.required,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string,
   title2: PropTypes.string,
-  description: PropTypes.string.required,
-  price: PropTypes.number.required,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number,
   currency: PropTypes.string,
-  servingSize: PropTypes.string.required,
+  servingSize: PropTypes.string,
 }
