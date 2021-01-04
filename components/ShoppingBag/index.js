@@ -43,7 +43,11 @@ export default function ShoppingBag(props) {
           </div>
         </div>
         <div className={classes.footer}>
-          <Button variant="outlined" className={classes.checkoutButton}>Checkout</Button>
+          <Button
+            variant="outlined"
+            className={classes.checkoutButton}>
+            Checkout
+          </Button>
         </div>
         </>)}
       </div>

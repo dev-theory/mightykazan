@@ -31,9 +31,9 @@ export default function Section(props) {
     setMeatPocket(false)
   }
   const handleAddToOrder = () => {
-    if (salad) { dispatch(addItem(itemSalad)) }
-    if (meatPocket) { dispatch(addItem(itemMeatPocket)) }
-    dispatch(addItem({ id: props.id, price: props.price }))
+    if (salad) { dispatch(addItem({ id: itemSalad.id })) }
+    if (meatPocket) { dispatch(addItem({ id: itemMeatPocket.id })) }
+    dispatch(addItem({ id: props.id }))
     resetAddons()
   }
 

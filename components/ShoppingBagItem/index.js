@@ -14,11 +14,8 @@ export default function ShoppingBagItem(props) {
   const count = useSelector(state => itemCountSelector(state, id))
   const subtotal = useSelector(state => itemSubtotalSelector(state, id))
   const handleCountChange = (value) => {
-    if (value > count) {
-      dispatch(addItem(item))
-    } else {
-      dispatch(removeItem(item))
-    }
+    const action = (value > count) ? addItem : removeItem
+    dispatch(action({ id: item.id }))
   }
   return (
     <div className={classes.root}>
