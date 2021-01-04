@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(theme => ({
   root: {
-    padding: '0.5rem',
+    padding: '0.2rem 0.5rem 0.5rem 0.5rem',
   },
   name: {
     flexGrow: 1,

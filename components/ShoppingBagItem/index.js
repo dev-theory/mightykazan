@@ -1,7 +1,7 @@
 import Typography from '@material-ui/core/Typography'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, itemCountSelector, itemSubTotalSelector, removeItem } from '../../redux/cart'
+import { addItem, itemCountSelector, itemSubtotalSelector, removeItem } from '../../redux/cart'
 import { itemByIdSelector } from '../../redux/itemsById'
 import Counter from '../Counter'
 import { useStyles } from './styles'
@@ -12,7 +12,7 @@ export default function ShoppingBagItem(props) {
   const dispatch = useDispatch()
   const item = useSelector(state => itemByIdSelector(state, id))
   const count = useSelector(state => itemCountSelector(state, id))
-  const subTotal = useSelector(state => itemSubTotalSelector(state, id))
+  const subtotal = useSelector(state => itemSubtotalSelector(state, id))
   const handleCountChange = (value) => {
     if (value > count) {
       dispatch(addItem(item))
@@ -31,7 +31,7 @@ export default function ShoppingBagItem(props) {
           x ${item.price}
         </Typography>
         <Typography variant="body1" className={classes.price}>
-          ${subTotal}
+          ${subtotal}
         </Typography>
       </div>
     </div>

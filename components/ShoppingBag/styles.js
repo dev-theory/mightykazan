@@ -16,6 +16,14 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  amount: {
+    alignSelf: 'flex-end',
+  },
+  amountLabel: {
+    alignSelf: 'flex-start',
+    flexGrow: 1,
+    textAlign: 'left',
+  },
   checkoutButton: {
     paddingLeft: '4rem',
     paddingRight: '4rem',
@@ -29,9 +37,19 @@ export const useStyles = makeStyles(theme => ({
     textAlign: 'center',
   },
   footer: {
-    padding: '1.5rem',
+    padding: '0 1rem 1.5rem 1rem',
     width: '100%',
     textAlign: 'center',
+  },
+  subtotalRow: {
+    display: 'flex',
+    marginTop: '1rem',
+    padding: '0.5rem 1rem',
+    borderTop: '1px solid #FFFFFF',
+  },
+  taxesRow: {
+    display: 'flex',
+    padding: '0 1rem 0.5rem 1rem',
   },
   title: {
     borderBottom: '1px solid #FFFFFF',
@@ -40,18 +58,9 @@ export const useStyles = makeStyles(theme => ({
     minHeight: '56px',
     padding: '12px',
   },
-  totalAmount: {
-    alignSelf: 'flex-end',
-  },
-  totalAmountLabel: {
-    alignSelf: 'flex-start',
-    flexGrow: 1,
-    textAlign: 'left',
-  },
   totalAmountRow: {
     display: 'flex',
-    margin: '1.5rem 0',
-    padding: '0.5rem 1rem',
+    padding: '0.5rem 1rem 0 1rem',
     borderTop: '1px solid #FFFFFF',
   },
 }))

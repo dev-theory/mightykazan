@@ -1,27 +1,37 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 import { itemByIdSelector } from '../itemsById'
 
-const initialState = {
+const getInitialState = () => ({
+  id: uuidv4(),
   itemsCount: {},
   itemsList: [],
+  subtotalAmount: 0,
+  taxesAmount: 0,
   totalAmount: 0,
   totalNumberOfItems: 0,
-}
+})
 
 function roundTo(num, decimals = 0) {
   const pow = Math.pow(10, decimals)
   return Math.round(num * pow) / pow
 }
 
+const TAXES = 0.13
+
 export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id]
 
 export const itemsListSelector = ({ cart }) => cart.itemsList
+
+export const subtotalAmountSelector = ({ cart }) => cart.subtotalAmount
+
+export const taxesAmountSelector = ({ cart }) => cart.taxesAmount
 
 export const totalAmountSelector = ({ cart }) => cart.totalAmount
 
 export const totalNumberOfItemsSelector = ({ cart }) => cart.totalNumberOfItems
 
-export const itemSubTotalSelector = createSelector(
+export const itemSubtotalSelector = createSelector(
   itemCountSelector,
   itemByIdSelector,
   (count, item) => roundTo(item.price * count, 2)
@@ -29,7 +39,7 @@ export const itemSubTotalSelector = createSelector(
 
 export const cartSlice = createSlice({
   name: 'cart',
-  initialState,
+  initialState: getInitialState(),
   reducers: {
     addItem: (state, action) => {
       const { id, price } = action.payload
@@ -38,7 +48,9 @@ export const cartSlice = createSlice({
         state.itemsList.push(id)
         state.itemsList.sort()
       }
-      state.totalAmount = roundTo(state.totalAmount + price, 2)
+      state.subtotalAmount = roundTo(state.subtotalAmount + price, 2)
+      state.taxesAmount = roundTo(state.subtotalAmount * TAXES, 2)
+      state.totalAmount = roundTo(state.subtotalAmount + state.taxesAmount, 2)
       state.totalNumberOfItems += 1
     },
     removeItem: (state, action) => {
@@ -47,7 +59,9 @@ export const cartSlice = createSlice({
       const itemExists = itemCount > 0
       const isLastItem = itemCount === 1
       if (itemExists) {
-        state.totalAmount = roundTo(state.totalAmount - price, 2)
+        state.subtotalAmount = roundTo(state.subtotalAmount - price, 2)
+        state.taxesAmount = roundTo(state.subtotalAmount * TAXES, 2)
+        state.totalAmount = roundTo(state.subtotalAmount + state.taxesAmount, 2)
         state.totalNumberOfItems -= 1
         if (isLastItem) {
           delete state.itemsCount[id]
@@ -58,7 +72,7 @@ export const cartSlice = createSlice({
       }
     },
     clear: (state) => {
-      return initialState
+      return getInitialState()
     },
   },
 })
