@@ -8,7 +8,7 @@ function roundTo(num, decimals = 0) {
   return Math.round(num * pow) / pow
 }
 
-export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id]
+export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id] || 0
 
 export const itemsListSelector = ({ cart }) => cart.itemsList
 
