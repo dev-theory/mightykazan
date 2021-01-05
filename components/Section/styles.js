@@ -36,10 +36,10 @@ export const useStyles = makeStyles(theme => ({
   },
   title1: {
     textOverflow: 'clip',
-    fontFamily: 'Yataghan',
+    fontFamily: 'Yataghan, Roboto, sans-serif',
   },
   title2: {
-    fontFamily: 'Fascinate',
+    fontFamily: 'Fascinate, Roboto, sans-serif',
     fontSize: '3rem',
   },
 }))
