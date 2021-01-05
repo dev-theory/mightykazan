@@ -1,40 +1,9 @@
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Div100vh from 'react-div-100vh'
 import { animated, useSpring } from 'react-spring'
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: theme.palette.primary.main,
-  },
-  container: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    display: 'flex',
-    position: 'fixed',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: '14px',
-    textAlign: 'center',
-  },
-  divider: {
-    width: '40%',
-    margin: '1rem auto',
-  },
-  iconPics: {
-    margin: 7,
-    width: '52px',
-  },
-  logo: {
-    width: '160px',
-  },
-}))
+import { useStyles } from './styles'
 
 export default function About(props) {
   const classes = useStyles()
