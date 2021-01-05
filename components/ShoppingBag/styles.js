@@ -18,11 +18,13 @@ export const useStyles = makeStyles(theme => ({
   },
   amount: {
     alignSelf: 'flex-end',
+    fontSize: '1rem',
   },
   amountLabel: {
     alignSelf: 'flex-start',
     flexGrow: 1,
     textAlign: 'left',
+    fontSize: '1rem',
   },
   checkoutButton: {
     paddingLeft: '4rem',
@@ -43,7 +45,7 @@ export const useStyles = makeStyles(theme => ({
   },
   subtotalRow: {
     display: 'flex',
-    marginTop: '1rem',
+    marginTop: '0.5rem',
     padding: '0.5rem 1rem',
     borderTop: '1px solid #FFFFFF',
   },
@@ -57,6 +59,12 @@ export const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     minHeight: '56px',
     padding: '12px',
+  },
+  totalAmount: {
+    fontSize: '1.25rem',
+  },
+  totalAmountLabel: {
+    fontSize: '1.25rem',
   },
   totalAmountRow: {
     display: 'flex',
