@@ -17,10 +17,9 @@ export const useStyles = makeStyles(theme => ({
     },
   },
   addonLabel: {
-    whiteSpace: 'nowrap',
   },
   addToOrderButton: {
-    marginTop: '8px',
+    marginTop: '1rem',
   },
   container: {
     display: 'flex',
@@ -34,6 +33,7 @@ export const useStyles = makeStyles(theme => ({
   },
   formGroup: {
     justifyContent: 'center',
+    marginBottom: '0.5rem',
   },
   price: {
     fontSize: '2rem',
