@@ -17,6 +17,7 @@ export const useStyles = makeStyles(theme => ({
     },
   },
   addonLabel: {
+    whiteSpace: 'nowrap',
   },
   addToOrderButton: {
     marginTop: '1rem',
