@@ -6,6 +6,15 @@ export const useStyles = makeStyles(theme => ({
     color: 'white',
     height: '100%',
     width: '100%',
+    position: 'relative',
+    '&:after': {
+      background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3), transparent)',
+      content: '""',
+      position: 'absolute',
+      height: 70,
+      width: '100%',
+      bottom: 0,
+    },
   },
   addonLabel: {
     whiteSpace: 'nowrap',
@@ -14,12 +23,7 @@ export const useStyles = makeStyles(theme => ({
     marginTop: '8px',
   },
   container: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
     display: 'flex',
-    position: 'fixed',
     justifyContent: 'center',
     alignItems: 'center',
     padding: '14px',

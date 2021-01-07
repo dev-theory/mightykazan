@@ -2,7 +2,7 @@ import Section from '../Section'
 
 export default function NomadsJoy(props) {
   return Section({
-    ...props,
+    style: props.style,
     id: '1',
     title: "Nomad's ",
     title2: 'Joy',

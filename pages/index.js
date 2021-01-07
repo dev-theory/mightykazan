@@ -1,8 +1,8 @@
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from 'react'
-import { animated, useTransition } from 'react-spring'
-import { useGesture } from 'react-use-gesture'
+import { useSelector } from 'react-redux'
+import { animated, useSpring } from 'react-spring'
 import About from '../components/About'
 import AppBar from '../components/AppBar'
 import ChickenPlov from '../components/ChickenPlov'
@@ -14,10 +14,12 @@ const useStyles = makeStyles(theme => ({
   root: {
   },
   container: {
-    height: '100vh',
+    position: 'fixed',
+    height: '100%',
+    overflowX: 'hidden',
   },
   video: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: 0,
     'object-fit': 'cover',
@@ -36,64 +38,32 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const sections = [
-  animated(NomadsJoy),
-  animated(ChickenPlov),
-  animated(About),
-]
+const AnimatedGrid = animated(Grid)
 
 export default function Home(props) {
   const classes = useStyles()
-  const [ { sectionIndex, direction }, setSection ] = useState({ sectionIndex: 0, direction: true })
   const [ isVideoLoaded, setVideoLoaded ] = useState(false)
-
-  const goToSection = (direction = true) => {
-    const step = (direction ? 1 : (sections.length-1))
-    setSection(({ sectionIndex }) => ({
-      sectionIndex: (sectionIndex + step) % sections.length,
-      direction
-    }))
-  }
-
-  const bind = useGesture({
-    onDragEnd: (({ movement: [ x, y ] }) => {
-      if (Math.abs(y) > 100) {
-        goToSection(y < 0)
-      }
-    }),
-    onWheelStart: ({ ctrlKey, direction: [ x, y ], ...rest }) => {
-      if (!ctrlKey) {
-        goToSection(y > 0)
-      }
-    },
-  })
-
-  const transitions = useTransition(sectionIndex, (p) => p, {
-    from: { opacity: 0, transform: `translate3d(0,${direction?'100%':'-100%'},0)` },
-    enter: [
-      { opacity: 0, transform: `translate3d(0,${direction?'90%':'-90%'},0)` },
-      { opacity: 1, transform: `translate3d(0,0,0)` },
-    ],
-    leave: { opacity: 0, transform: `translate3d(0,${direction?'-50%':'50%'},0)` },
+  const scrollTo = useSelector(state => state.scrollTo)
+  const scrollProps = useSpring({
+    to: { scroll: scrollTo },
+    config: { tension: 280, friction: 60 }
   })
 
   return (
     <div className={classes.root}>
-      <AppBar onMenuItemClick={setSection} />
+      <AppBar />
 
-      <Grid container
-            justify="center"
-            alignItems="center"
-            className={classes.container}
-            {...bind()}>
-        {transitions.map(({ item, props, key }) => {
-          const Section = sections[item]
-          return (
-            <Section key={key} style={props} />
-          )
-        })}
+      <AnimatedGrid
+        container
+        justify="center"
+        alignItems="center"
+        className={classes.container}
+        scrollTop={scrollProps.scroll}>
+        <NomadsJoy />
+        <ChickenPlov />
+        <About />
         <ScrollIndicator />
-      </Grid>
+      </AnimatedGrid>
 
       <video
         autoPlay={true}
@@ -101,7 +71,8 @@ export default function Home(props) {
         loop={true}
         muted={true}
         className={classes.video}
-        onPlay={() => setVideoLoaded(true)}>
+        onPlay={() => setVideoLoaded(true)}
+        >
         <source src="/media/pilaf-1080p.mp4" type="video/mp4" />
         <source src="/media/pilaf-1080p.webm" type="video/webm" />
       </video>

@@ -38,8 +38,8 @@ export default function ShoppingBag(props) {
             <Typography variant="h6" className={classes.amount}>${taxesAmount} <Typography component="span" variant="body2">{props.currency ? props.currency : 'CAD'}</Typography></Typography>
           </div>
           <div className={classes.totalAmountRow}>
-            <Typography variant="h6" className={[classes.amountLabel, classes.totalAmountLabel]}>Total:</Typography>
-            <Typography variant="h6" className={[classes.amount, classes.totalAmount]}>${totalAmount} <Typography component="span" variant="body2">{props.currency ? props.currency : 'CAD'}</Typography></Typography>
+            <Typography variant="h6" className={`${classes.amountLabel} ${classes.totalAmountLabel}`}>Total:</Typography>
+            <Typography variant="h6" className={`${classes.amount} ${classes.totalAmount}`}>${totalAmount} <Typography component="span" variant="body2">{props.currency ? props.currency : 'CAD'}</Typography></Typography>
           </div>
         </div>
         <div className={classes.footer}>

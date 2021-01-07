@@ -12,7 +12,6 @@ import { useStyles } from './styles'
 
 export default function AppBar(props) {
   const classes = useStyles(props)
-  const { onMenuItemClick } = props
   const [ isMenuOpen, setMenuOpen ] = useState(false)
   const [ isShoppingBagOpen, setShoppingBagOpen ] = useState(false)
   const toggleMenu = () => {
@@ -23,9 +22,10 @@ export default function AppBar(props) {
     setMenuOpen(false)
     setShoppingBagOpen(!isShoppingBagOpen)
   }
+  const rootClasses = `${classes.root} ${(isMenuOpen || isShoppingBagOpen) ? classes.nonHomePage : ''}`
   return (
     <>
-      <MuiAppBar position="fixed" color="transparent" elevation={0}>
+      <MuiAppBar position="fixed" color="transparent" elevation={0} className={rootClasses}>
         <Toolbar>
           <IconButton edge="start" aria-label="menu" onClick={toggleMenu}>
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
@@ -39,14 +39,9 @@ export default function AppBar(props) {
 
       <Menu
         open={isMenuOpen}
-        onMenuItemClick={onMenuItemClick}
         onMenuClose={toggleMenu} />
 
       <ShoppingBag open={isShoppingBagOpen} />
     </>
   )
-}
-
-AppBar.propTypes = {
-  onMenuItemClick: PropTypes.func,
 }

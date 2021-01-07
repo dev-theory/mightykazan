@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import Div100vh from 'react-div-100vh'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem, totalNumberOfItemsSelector } from '../../redux/cart'
+import { addItem } from '../../redux/cart'
 import { itemByIdSelector } from '../../redux/itemsById'
 import { useStyles } from './styles'
 
@@ -22,8 +22,6 @@ export default function Section(props) {
   const itemMeatPocket = useSelector(state => itemByIdSelector(state, '4'))
   const [ salad, setSalad ] = useState(false)
   const [ meatPocket, setMeatPocket ] = useState(false)
-
-  const totalNumberOfItemsInCart = useSelector(totalNumberOfItemsSelector)
 
   const handleSalad = () => setSalad(!salad)
   const handleMeatPocket = () => setMeatPocket(!meatPocket)
@@ -37,9 +35,9 @@ export default function Section(props) {
     dispatch(addItem({ id: props.id }))
     resetAddons()
   }
-
   return (
     <Grid
+      id={`section-${props.id}`}
       style={props.style}
       container
       justify="center"
