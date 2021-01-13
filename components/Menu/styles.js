@@ -23,10 +23,6 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'normal',
     textAlign: 'center',
   },
-  devTheory: {
-    textDecoration: 'underline',
-    fontWeight: 'bold',
-  },
   divider: {
     width: '150px',
     margin: '0.7rem auto',
@@ -40,7 +36,5 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     fontSize: '2em',
     justifyContent: 'center',
-  },
-  footer: {
   },
 }))

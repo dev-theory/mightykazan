@@ -1,6 +1,7 @@
 import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
+import Footer from '../Footer'
 import VisibilityAnimator from '../VisibilityAnimator'
 import {
   section1Props,
@@ -40,10 +41,7 @@ export default function About(props) {
                 We use only quality ingredients. Based on the season we buy from local farmers to support local businesses.
               </Typography>
           </VisibilityAnimator>
-          <div className={classes.footer}>
-            <Typography variant="subtitle2">© {new Date().getFullYear()} Mighty Kazan</Typography>
-            <Typography variant="subtitle2">built by <a className={classes.devTheory} href="https://devtheory.com">DevTheory Inc.</a></Typography>
-          </div>
+          <Footer classes={{ root: classes.footer }} />
         </Grid>
       </div>
     </Grid>

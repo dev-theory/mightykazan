@@ -1,9 +1,9 @@
 import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
 import Slide from '@material-ui/core/Slide'
-import Typography from '@material-ui/core/Typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { isMenuOpenSelector, scrollTo } from '../../redux/app'
+import Footer from '../Footer'
 import { useStyles } from './styles'
 
 export default function Menu(props) {
@@ -31,10 +31,7 @@ export default function Menu(props) {
           <Divider className={classes.divider} />
           <MenuItem className={classes.menuItem} onClick={navigateToAbout}>About</MenuItem>
         </div>
-        <div className={classes.footer}>
-          <Typography variant="subtitle2">© {new Date().getFullYear()} Mighty Kazan</Typography>
-          <Typography variant="subtitle2">built by <a className={classes.devTheory} href="https://devtheory.com">DevTheory Inc.</a></Typography>
-        </div>
+        <Footer />
       </div>
     </Slide>
   )

@@ -16,6 +16,7 @@ import {
   clear,
   setCheckoutEmail,
 } from '../../redux/cart'
+import Footer from '../Footer'
 import { useStyles } from './styles'
 
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -89,10 +90,7 @@ export default function Checkout(props) {
             </Button>
           </div>
         </div>
-        <div className={classes.footer}>
-          <Typography variant="subtitle2">© {new Date().getFullYear()} Mighty Kazan</Typography>
-          <Typography variant="subtitle2">built by <a className={classes.devTheory} href="https://devtheory.com">DevTheory Inc.</a></Typography>
-        </div>
+        <Footer />
       </div>
     </Slide>
   )

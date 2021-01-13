@@ -36,10 +36,6 @@ export const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap',
     padding: '0.25rem 0.5rem',
   },
-  devTheory: {
-    textDecoration: 'underline',
-    fontWeight: 'bold',
-  },
   divider: {
     width: '150px',
     margin: '0.7rem auto',
@@ -51,7 +47,5 @@ export const useStyles = makeStyles(theme => ({
     userSelect: 'none',
     width: '160px',
     margin: '0 auto 1rem auto',
-  },
-  footer: {
   },
 }))

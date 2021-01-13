@@ -12,10 +12,6 @@ export const useStyles = makeStyles(theme => ({
     alignItems: 'flex-start',
     textAlign: 'center',
   },
-  devTheory: {
-    textDecoration: 'underline',
-    fontWeight: 'bold',
-  },
   divider: {
     width: '40%',
     margin: '1rem auto',
