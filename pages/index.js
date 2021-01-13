@@ -9,6 +9,7 @@ import ChickenPlov from '../components/ChickenPlov'
 import NomadsJoy from '../components/NomadsJoy'
 import ScrollIndicator from '../components/ScrollIndicator'
 import SplashScreen from '../components/SplashScreen'
+import { scrollToSelector } from '../redux/app'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,7 +44,7 @@ const AnimatedGrid = animated(Grid)
 export default function Home(props) {
   const classes = useStyles()
   const [ isVideoLoaded, setVideoLoaded ] = useState(false)
-  const scrollTo = useSelector(state => state.scrollTo)
+  const scrollTo = useSelector(scrollToSelector)
   const scrollProps = useSpring({
     to: { scroll: scrollTo },
     config: { tension: 280, friction: 60 }

@@ -8,6 +8,10 @@ function roundTo(num, decimals = 0) {
   return Math.round(num * pow) / pow
 }
 
+export const checkoutEmailSelector = ({ cart }) => cart.checkoutEmail
+
+export const checkoutInProgressSelector = ({ cart }) => cart.checkoutInProgress
+
 export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id] || 0
 
 export const itemsListSelector = ({ cart }) => cart.itemsList

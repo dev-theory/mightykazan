@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
+
 export * from './selectors'
 
 function getInitialState() {
   return {
     id: uuidv4(),
+    checkoutEmail: '',
+    checkoutInProgress: false,
     itemsCount: {},
     itemsList: [],
   }
@@ -18,6 +21,12 @@ export const cartSlice = createSlice({
       const { id } = action.payload
       state.itemsCount[id] = (state.itemsCount[id] || 0) + 1
       state.itemsList = Object.keys(state.itemsCount).sort()
+    },
+    setCheckoutEmail (state, action) {
+      state.checkoutEmail = action.payload
+    },
+    checkout (state, action) {
+      state.checkoutInProgress = action.payload
     },
     removeItem (state, action) {
       const { id } = action.payload
@@ -41,6 +50,12 @@ export const cartSlice = createSlice({
   },
 })
 
-export const { addItem, removeItem, clear } = cartSlice.actions
+export const {
+  addItem,
+  checkout,
+  clear,
+  removeItem,
+  setCheckoutEmail,
+} = cartSlice.actions
 
 export default cartSlice.reducer

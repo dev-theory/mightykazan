@@ -3,8 +3,14 @@ import IconButton from '@material-ui/core/IconButton'
 import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  isHomeOpenSelector,
+  isMenuOpenSelector,
+  showHome,
+  showMenu,
+} from '../../redux/app'
+import Checkout from '../Checkout'
 import Menu from '../Menu'
 import ShoppingBag from '../ShoppingBag'
 import ShoppingBagButton from '../ShoppingBagButton'
@@ -12,17 +18,13 @@ import { useStyles } from './styles'
 
 export default function AppBar(props) {
   const classes = useStyles(props)
-  const [ isMenuOpen, setMenuOpen ] = useState(false)
-  const [ isShoppingBagOpen, setShoppingBagOpen ] = useState(false)
+  const dispatch = useDispatch()
+  const isHomeOpen = useSelector(isHomeOpenSelector)
+  const isMenuOpen = useSelector(isMenuOpenSelector)
   const toggleMenu = () => {
-    setShoppingBagOpen(false)
-    setMenuOpen(!isMenuOpen)
+    dispatch(isMenuOpen ? showHome() : showMenu())
   }
-  const toggleShoppingBag = () => {
-    setMenuOpen(false)
-    setShoppingBagOpen(!isShoppingBagOpen)
-  }
-  const rootClasses = `${classes.root} ${(isMenuOpen || isShoppingBagOpen) ? classes.nonHomePage : ''}`
+  const rootClasses = `${classes.root} ${isHomeOpen ? '' : classes.nonHomePage}`
   return (
     <>
       <MuiAppBar position="fixed" color="transparent" elevation={0} className={rootClasses}>
@@ -31,17 +33,13 @@ export default function AppBar(props) {
             {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
           <div className={classes.appBarSpacer}> </div>
-          <ShoppingBagButton
-            onClick={toggleShoppingBag}
-            isShoppingBagOpen={isShoppingBagOpen} />
+          <ShoppingBagButton />
         </Toolbar>
       </MuiAppBar>
 
-      <Menu
-        open={isMenuOpen}
-        onMenuClose={toggleMenu} />
-
-      <ShoppingBag open={isShoppingBagOpen} />
+      <Menu />
+      <ShoppingBag />
+      <Checkout />
     </>
   )
 }

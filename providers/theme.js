@@ -13,6 +13,16 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiInputLabel: {
+      root: {
+        color: '#FFFFFF',
+      },
+    },
+    MuiOutlinedInput: {
+      notchedOutline: {
+        borderColor: `rgba(255,255,255,0.5)`,
+      },
+    },
     MuiSvgIcon: {
       root: {
         height: '1.5rem',
@@ -32,18 +42,18 @@ const theme = createMuiTheme({
     },
   },
   palette: {
-    primary: {
+    brand: {
       light: '#ffc947',
       main: '#ff9800',
       dark: '#c66900',
       contrastText: '#000000',
     },
-    // secondary: {
-    //   light: '#cfff95',
-    //   main: '#9ccc65',
-    //   dark: '#6b9b37',
-    //   contrastText: '#000000',
-    // },
+    primary: {
+      light: '#cfff95',
+      main: '#9ccc65',
+      dark: '#6b9b37',
+      contrastText: '#000000',
+    },
     error: {
       main: red.A400,
     },

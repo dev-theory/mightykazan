@@ -1,28 +1,26 @@
 import Divider from '@material-ui/core/Divider'
 import MenuItem from '@material-ui/core/MenuItem'
-import PropTypes from 'prop-types'
 import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
-import { useDispatch } from 'react-redux'
-import { animated, useSpring } from 'react-spring'
-import { scrollTo } from '../../redux/scrollTo'
+import { useDispatch, useSelector } from 'react-redux'
+import { isMenuOpenSelector, scrollTo } from '../../redux/app'
 import { useStyles } from './styles'
 
 export default function Menu(props) {
-  const classes = useStyles()
+  const classes = useStyles(props)
   const dispatch = useDispatch()
+  const open = useSelector(isMenuOpenSelector)
 
   const navigateTo = (sectionIndex) => {
     const sectionOffsetTop = document.querySelector(sectionIndex).offsetTop
     dispatch(scrollTo(sectionOffsetTop))
-    props.onMenuClose()
   }
   const navigateToNomadsJoy = () => navigateTo('#section-1')
   const navigateToChickenPlov = () => navigateTo('#section-2')
   const navigateToAbout = () => navigateTo('#section-about')
 
   return (
-    <Slide in={props.open} direction="right">
+    <Slide in={open} direction="right">
       <div className={classes.root}>
         <div className={classes.container}>
           <img className={classes.logo} src="/images/mightykazan-logo-brand-white.png" />
@@ -40,9 +38,4 @@ export default function Menu(props) {
       </div>
     </Slide>
   )
-}
-
-Menu.propTypes = {
-  onMenuClose: PropTypes.func,
-  open: PropTypes.bool.isRequired,
 }

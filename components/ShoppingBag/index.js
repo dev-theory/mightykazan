@@ -1,25 +1,39 @@
-import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
-import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
+  isShoppingBagOpenSelector,
+  showCheckout
+} from '../../redux/app'
+import {
+  checkout,
+  checkoutInProgressSelector,
   itemsListSelector,
   subtotalAmountSelector,
   taxesAmountSelector,
   totalAmountSelector
 } from '../../redux/cart'
+import ProgressButton from '../ProgressButton'
 import ShoppingBagItem from '../ShoppingBagItem'
 import { useStyles } from './styles'
 
+const checkoutCart = () => (dispatch, getState, apis) => {
+  dispatch(checkout(false))
+  dispatch(showCheckout())
+}
+
 export default function ShoppingBag(props) {
   const classes = useStyles(props)
+  const dispatch = useDispatch()
+  const open = useSelector(isShoppingBagOpenSelector)
   const items = useSelector(itemsListSelector)
   const subtotalAmount = useSelector(subtotalAmountSelector)
   const taxesAmount = useSelector(taxesAmountSelector)
   const totalAmount = useSelector(totalAmountSelector)
+  const checkoutInProgress = useSelector(checkoutInProgressSelector)
+  const onCheckoutClick = () => dispatch(checkoutCart())
   return (
-    <Slide in={props.open} direction="left">
+    <Slide in={open} direction="left">
       <div className={classes.root}>
         <Typography variant="h6" className={classes.title}>Your Order</Typography>
         {items.length === 0 ? (
@@ -43,18 +57,16 @@ export default function ShoppingBag(props) {
           </div>
         </div>
         <div className={classes.footer}>
-          <Button
+          <ProgressButton
             variant="outlined"
-            className={classes.checkoutButton}>
+            className={classes.checkoutButton}
+            inProgress={checkoutInProgress}
+            onClick={onCheckoutClick}>
             Checkout
-          </Button>
+          </ProgressButton>
         </div>
         </>)}
       </div>
     </Slide>
   )
-}
-
-ShoppingBag.propTypes = {
-  open: PropTypes.bool.isRequired,
 }
