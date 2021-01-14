@@ -1,21 +1,12 @@
-import TagManager from 'react-gtm-module'
 import {
   addToCart,
+  dataLayer,
   purchase,
   removeFromCart,
   viewCart,
 } from './events'
 
-export const initializeGTM = (store) => {
-  if (!process.env.NEXT_PUBLIC_GTM_ID) {
-    return
-  }
-  TagManager.initialize({
-    gtmId: process.env.NEXT_PUBLIC_GTM_ID,
-    auth: process.env.NEXT_PUBLIC_GTM_AUTH,
-    preview: process.env.NEXT_PUBLIC_GTM_PREVIEW,
-  })
-}
+export * from './utils'
 
 const gtmMiddleware = (store) => (next) => (action) => {
   const result =  next(action)

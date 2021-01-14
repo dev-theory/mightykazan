@@ -8,13 +8,7 @@ import {
   taxesAmountSelector,
   totalAmountSelector,
 } from '../cart'
-
-function dataLayer(data) {
-  if (!process.env.NEXT_PUBLIC_GTM_ID) {
-    return
-  }
-  TagManager.dataLayer({ dataLayer: data })
-}
+import { dataLayer } from './utils'
 
 const affiliation = 'Mighty Kazan'
 const currency = 'CAD'

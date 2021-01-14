@@ -10,7 +10,12 @@ import { initializeGTM } from '../redux/gtm'
 import store from '../redux/store'
 
 export default function MyApp({ Component, pageProps }) {
-  useEffect(() => initializeGTM(store))
+  useEffect(() => {
+    geoip2.city(
+      (data) => initializeGTM(store, { postal_code: data.postal.code }),
+      () => initializeGTM(store)
+    )
+  })
 
   useEffect(() => {
     // Remove the server-side injected CSS.
