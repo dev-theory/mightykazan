@@ -1,15 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Head from 'next/head';
+import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import { Provider } from 'react-redux'
-import theme from '../providers/theme';
 import '../providers/globals.css'
+import theme from '../providers/theme';
+import { initializeGTM } from '../redux/gtm'
 import store from '../redux/store'
 
 export default function MyApp({ Component, pageProps }) {
-  React.useEffect(() => {
+  useEffect(() => initializeGTM(store))
+
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -18,7 +21,7 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Mighty Kazan - Nomadic food of Central Asia</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
@@ -30,7 +33,7 @@ export default function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </ThemeProvider>
       </Provider>
-    </React.Fragment>
+    </>
   );
 }
 

@@ -74,8 +74,8 @@ export default function Home(props) {
         className={classes.video}
         onPlay={() => setVideoLoaded(true)}
         >
-        <source src="/media/pilaf-1080p.mp4" type="video/mp4" />
         <source src="/media/pilaf-1080p.webm" type="video/webm" />
+        <source src="/media/pilaf-1080p.mp4" type="video/mp4" />
       </video>
       <div className={classes.videoOverlay}> </div>
 
