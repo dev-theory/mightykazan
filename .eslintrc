@@ -1,0 +1,21 @@
+{
+  "rules": {
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "jsx-quotes": ["error", "prefer-double"],
+    "quotes": [
+      "error",
+      "double",
+      { "avoidEscape": true, "allowTemplateLiterals": false }
+    ],
+    "space-before-function-paren": ["error", "never"]
+  }
+}

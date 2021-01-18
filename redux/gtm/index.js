@@ -1,15 +1,7 @@
-import {
-  addToCart,
-  dataLayer,
-  purchase,
-  removeFromCart,
-  viewCart,
-} from './events'
-
-export * from './utils'
+import { addToCart, purchase, removeFromCart, viewCart } from "./events"
 
 const gtmMiddleware = (store) => (next) => (action) => {
-  const result =  next(action)
+  const result = next(action)
   const state = store.getState()
 
   addToCart(state, action)

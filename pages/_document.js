@@ -1,7 +1,6 @@
-import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import theme from '../providers/theme';
+import React from "react"
+import Document, { Html, Head, Main, NextScript } from "next/document"
+import { ServerStyleSheets } from "@material-ui/core/styles"
 
 export default class MyDocument extends Document {
   render() {
@@ -9,22 +8,38 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* PWA primary color */}
-          <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
           <link rel="manifest" href="/site.webmanifest" />
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff9800" />
           <meta name="msapplication-TileColor" content="#ff9800" />
           <meta name="theme-color" content="#ffffff" />
-          <meta name="description" content="Best tasting Nomadic food of Central Asia, plov, pilaf and pastries you can order online in Toronto. We use quality ingredients from local farmers." />
+          <meta
+            name="description"
+            content="Best tasting Nomadic food of Central Asia, plov, pilaf and pastries you can order online in Toronto. We use quality ingredients from local farmers."
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script src="//geoip-js.com/js/apis/geoip2/v2.1/geoip2.js" type="text/javascript"></script>
         </body>
       </Html>
-    );
+    )
   }
 }
 
@@ -54,19 +69,22 @@ MyDocument.getInitialProps = async (ctx) => {
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
 
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-    });
+    })
 
-  const initialProps = await Document.getInitialProps(ctx);
+  const initialProps = await Document.getInitialProps(ctx)
 
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
-  };
-};
+    styles: [
+      ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement(),
+    ],
+  }
+}

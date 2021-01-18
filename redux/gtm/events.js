@@ -1,17 +1,16 @@
-import { createSelector } from '@reduxjs/toolkit'
-import TagManager from 'react-gtm-module'
-import { itemByIdSelector } from '../itemsById'
+import { createSelector } from "@reduxjs/toolkit"
+import { dataLayer } from "../../lib/gtm"
+import { itemByIdSelector } from "../itemsById"
 import {
   cartIdSelector,
   itemCountSelector,
   itemsListSelector,
   taxesAmountSelector,
   totalAmountSelector,
-} from '../cart'
-import { dataLayer } from './utils'
+} from "../cart"
 
-const affiliation = 'Mighty Kazan'
-const currency = 'CAD'
+const affiliation = "Mighty Kazan"
+const currency = "CAD"
 
 const ecommerceItem = (item) => ({
   item_id: item.id,
@@ -21,21 +20,20 @@ const ecommerceItem = (item) => ({
   price: item.price,
 })
 
-export const itemsInCart = createSelector(
-  state => state,
+const itemsInCart = createSelector(
+  (state) => state,
   itemsListSelector,
-  (state, itemsList) => itemsList.map(id => ({
-    ...ecommerceItem(
-      itemByIdSelector(state, id)
-    ),
-    quantity: itemCountSelector(state, id),
-  }))
+  (state, itemsList) =>
+    itemsList.map((id) => ({
+      ...ecommerceItem(itemByIdSelector(state, id)),
+      quantity: itemCountSelector(state, id),
+    }))
 )
 
 export function addToCart(state, action) {
-  if (action.type === 'cart/addItem') {
+  if (action.type === "cart/addItem") {
     dataLayer({
-      event: 'add_to_cart',
+      event: "add_to_cart",
       ecommerce: {
         items: itemsInCart(state),
       },
@@ -44,9 +42,9 @@ export function addToCart(state, action) {
 }
 
 export function purchase(state, action) {
-  if (action.type === 'app/showScreen' && action.payload === '/checkout') {
+  if (action.type === "app/showScreen" && action.payload === "/checkout") {
     dataLayer({
-      event: 'purchase',
+      event: "purchase",
       ecommerce: {
         transaction_id: cartIdSelector(state),
         affiliation,
@@ -60,9 +58,9 @@ export function purchase(state, action) {
 }
 
 export function removeFromCart(state, action) {
-  if (action.type === 'cart/removeItem') {
+  if (action.type === "cart/removeItem") {
     dataLayer({
-      event: 'remove_from_cart',
+      event: "remove_from_cart",
       ecommerce: {
         items: itemsInCart(state),
       },
@@ -71,9 +69,9 @@ export function removeFromCart(state, action) {
 }
 
 export function viewCart(state, action) {
-  if (action.type === 'app/showScreen' && action.payload === '/shopping-bag') {
+  if (action.type === "app/showScreen" && action.payload === "/shopping-bag") {
     dataLayer({
-      event: 'view_cart',
+      event: "view_cart",
       ecommerce: {
         items: itemsInCart(state),
       },
