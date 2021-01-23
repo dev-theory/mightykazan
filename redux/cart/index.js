@@ -15,7 +15,7 @@ function getInitialState() {
     id: uuidv4(),
     checkoutEmail: "",
     checkoutInProgress: false,
-    itemsCount: {},
+    itemsQuantity: {},
     itemsList: [],
   }
 }
@@ -26,8 +26,8 @@ export const cartSlice = createSlice({
   reducers: {
     addItem(state, action) {
       const { id } = action.payload
-      state.itemsCount[id] = (state.itemsCount[id] || 0) + 1
-      state.itemsList = Object.keys(state.itemsCount).sort()
+      state.itemsQuantity[id] = (state.itemsQuantity[id] || 0) + 1
+      state.itemsList = Object.keys(state.itemsQuantity).sort()
     },
     setCheckoutEmail(state, action) {
       state.checkoutEmail = action.payload
@@ -37,17 +37,17 @@ export const cartSlice = createSlice({
     },
     removeItem(state, action) {
       const { id } = action.payload
-      const itemCount = state.itemsCount[id]
-      const itemExists = itemCount > 0
-      const isLastItem = itemCount === 1
+      const itemQuantity = state.itemsQuantity[id]
+      const itemExists = itemQuantity > 0
+      const isLastItem = itemQuantity === 1
       if (!itemExists) {
         return state
       }
       if (isLastItem) {
-        delete state.itemsCount[id]
-        state.itemsList = Object.keys(state.itemsCount).sort()
+        delete state.itemsQuantity[id]
+        state.itemsList = Object.keys(state.itemsQuantity).sort()
       } else {
-        state.itemsCount[id] -= 1
+        state.itemsQuantity[id] -= 1
       }
     },
     clear: {

@@ -17,7 +17,8 @@ export const checkoutEmailSelector = ({ cart }) => cart.checkoutEmail
 
 export const checkoutInProgressSelector = ({ cart }) => cart.checkoutInProgress
 
-export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id] || 0
+export const itemQuantitySelector = ({ cart }, id) =>
+  cart.itemsQuantity[id] || 0
 
 export const itemsListSelector = ({ cart }) => cart.itemsList
 
@@ -30,7 +31,7 @@ export const itemsInCartSelector = createSelector(
         ...map,
         [id]: {
           ...pick(["id", "name", "price"])(itemByIdSelector(state, id)),
-          quantity: itemCountSelector(state, id),
+          quantity: itemQuantitySelector(state, id),
         },
       }),
       {}
@@ -38,7 +39,7 @@ export const itemsInCartSelector = createSelector(
 )
 
 export const itemSubtotalSelector = createSelector(
-  itemCountSelector,
+  itemQuantitySelector,
   itemByIdSelector,
   (count, item) => roundTo(item.price * count, 2)
 )
@@ -71,6 +72,6 @@ export const totalNumberOfItemsSelector = createSelector(
   itemsListSelector,
   (state, itemsList) =>
     itemsList
-      .map((id) => itemCountSelector(state, id))
+      .map((id) => itemQuantitySelector(state, id))
       .reduce((totalNumberOfItems, count) => totalNumberOfItems + count, 0)
 )

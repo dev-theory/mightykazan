@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { useDispatch, useSelector } from "react-redux"
 import {
   addItem,
-  itemCountSelector,
+  itemQuantitySelector,
   itemSubtotalSelector,
   removeItem,
 } from "../../redux/cart"
@@ -16,7 +16,7 @@ export default function ShoppingBagItem(props) {
   const { id } = props
   const dispatch = useDispatch()
   const item = useSelector((state) => itemByIdSelector(state, id))
-  const count = useSelector((state) => itemCountSelector(state, id))
+  const count = useSelector((state) => itemQuantitySelector(state, id))
   const subtotal = useSelector((state) => itemSubtotalSelector(state, id))
   const handleCountChange = (value) => {
     const action = value > count ? addItem : removeItem

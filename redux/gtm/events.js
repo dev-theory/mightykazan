@@ -3,7 +3,7 @@ import { dataLayer } from "../../lib/gtm"
 import { itemByIdSelector } from "../itemsById"
 import {
   cartIdSelector,
-  itemCountSelector,
+  itemQuantitySelector,
   itemsListSelector,
   taxesAmountSelector,
   totalAmountSelector,
@@ -26,7 +26,7 @@ const itemsInCartSelector = createSelector(
   (state, itemsList) =>
     itemsList.map((id) => ({
       ...ecommerceItem(itemByIdSelector(state, id)),
-      quantity: itemCountSelector(state, id),
+      quantity: itemQuantitySelector(state, id),
     }))
 )
 
