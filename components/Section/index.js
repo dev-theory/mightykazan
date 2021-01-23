@@ -1,27 +1,26 @@
-import Button from '@material-ui/core/Button'
-import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import Grid from '@material-ui/core/Grid'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
-import Div100vh from 'react-div-100vh'
-import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../../redux/cart'
-import { itemByIdSelector } from '../../redux/itemsById'
-import { useStyles } from './styles'
+import Button from "@material-ui/core/Button"
+import Checkbox from "@material-ui/core/Checkbox"
+import Divider from "@material-ui/core/Divider"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import FormGroup from "@material-ui/core/FormGroup"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
+import PropTypes from "prop-types"
+import { useState } from "react"
+import Div100vh from "react-div-100vh"
+import { useDispatch, useSelector } from "react-redux"
+import { addItem } from "../../redux/cart"
+import { itemByIdSelector } from "../../redux/itemsById"
+import { useStyles } from "./styles"
 
 export default function Section(props) {
   const classes = useStyles(props)
   const dispatch = useDispatch()
-  const item = useSelector(state => itemByIdSelector(state, props.id))
-  const itemSalad = useSelector(state => itemByIdSelector(state, '3'))
-  const itemMeatPocket = useSelector(state => itemByIdSelector(state, '4'))
-  const [ salad, setSalad ] = useState(false)
-  const [ meatPocket, setMeatPocket ] = useState(false)
+  const item = useSelector((state) => itemByIdSelector(state, props.id))
+  const itemSalad = useSelector((state) => itemByIdSelector(state, "3"))
+  const itemMeatPocket = useSelector((state) => itemByIdSelector(state, "4"))
+  const [salad, setSalad] = useState(false)
+  const [meatPocket, setMeatPocket] = useState(false)
 
   const handleSalad = () => setSalad(!salad)
   const handleMeatPocket = () => setMeatPocket(!meatPocket)
@@ -30,8 +29,12 @@ export default function Section(props) {
     setMeatPocket(false)
   }
   const handleAddToOrder = () => {
-    if (salad) { dispatch(addItem({ id: itemSalad.id })) }
-    if (meatPocket) { dispatch(addItem({ id: itemMeatPocket.id })) }
+    if (salad) {
+      dispatch(addItem({ id: itemSalad.id }))
+    }
+    if (meatPocket) {
+      dispatch(addItem({ id: itemMeatPocket.id }))
+    }
     dispatch(addItem({ id: props.id }))
     resetAddons()
   }
@@ -42,41 +45,56 @@ export default function Section(props) {
       container
       justify="center"
       alignItems="center"
-      className={classes.root}>
+      className={classes.root}
+    >
       <Div100vh className={classes.container}>
         <Grid item xs={12} sm={9} md={6} lg={3}>
-          <Typography variant="h4" noWrap className={classes.title1}>{props.title}<span className={classes.title2}>{props.title2}</span></Typography>
+          <Typography variant="h4" noWrap className={classes.title1}>
+            {props.title}
+            <span className={classes.title2}>{props.title2}</span>
+          </Typography>
           <Divider className={classes.divider} />
           <Typography variant="body1">{props.description}</Typography>
           <Divider className={classes.divider} />
-          <Typography variant="body1" className={classes.price}>${item.price} <Typography component="span" variant="body2">{item.currency ? item.currency : 'CAD'}</Typography></Typography>
+          <Typography variant="body1" className={classes.price}>
+            ${item.price}{" "}
+            <Typography component="span" variant="body2">
+              {item.currency ? item.currency : "CAD"}
+            </Typography>
+          </Typography>
           <FormGroup row classes={{ root: classes.formGroup }}>
             <FormControlLabel
-              control={<Checkbox
-                           checked={salad}
-                           onChange={handleSalad}
-                           name="addSalad" />}
+              control={
+                <Checkbox
+                  checked={salad}
+                  onChange={handleSalad}
+                  name="addSalad"
+                />
+              }
               label={`Add ${itemSalad.name} $${itemSalad.price}`}
               classes={{ label: classes.addonLabel }}
-              />
+            />
           </FormGroup>
           <FormGroup row classes={{ root: classes.formGroup }}>
             <FormControlLabel
-              control={<Checkbox
-                           checked={meatPocket}
-                           onChange={handleMeatPocket}
-                           name="addMeatPie" />}
+              control={
+                <Checkbox
+                  checked={meatPocket}
+                  onChange={handleMeatPocket}
+                  name="addMeatPie"
+                />
+              }
               label={`Add ${itemMeatPocket.name} $${itemMeatPocket.price}`}
               classes={{ label: classes.addonLabel }}
-              />
+            />
           </FormGroup>
           <Button
             variant="outlined"
             className={classes.addToOrderButton}
-            onClick={handleAddToOrder}>
+            onClick={handleAddToOrder}
+          >
             Add to order
           </Button>
-
         </Grid>
       </Div100vh>
     </Grid>

@@ -1,26 +1,33 @@
-import Typography from '@material-ui/core/Typography'
-import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
-import { addItem, itemCountSelector, itemSubtotalSelector, removeItem } from '../../redux/cart'
-import { itemByIdSelector } from '../../redux/itemsById'
-import Counter from '../Counter'
-import { useStyles } from './styles'
+import Typography from "@material-ui/core/Typography"
+import PropTypes from "prop-types"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  addItem,
+  itemCountSelector,
+  itemSubtotalSelector,
+  removeItem,
+} from "../../redux/cart"
+import { itemByIdSelector } from "../../redux/itemsById"
+import Counter from "../Counter"
+import { useStyles } from "./styles"
 
 export default function ShoppingBagItem(props) {
   const classes = useStyles(props)
   const { id } = props
   const dispatch = useDispatch()
-  const item = useSelector(state => itemByIdSelector(state, id))
-  const count = useSelector(state => itemCountSelector(state, id))
-  const subtotal = useSelector(state => itemSubtotalSelector(state, id))
+  const item = useSelector((state) => itemByIdSelector(state, id))
+  const count = useSelector((state) => itemCountSelector(state, id))
+  const subtotal = useSelector((state) => itemSubtotalSelector(state, id))
   const handleCountChange = (value) => {
-    const action = (value > count) ? addItem : removeItem
+    const action = value > count ? addItem : removeItem
     dispatch(action({ id: item.id }))
   }
   return (
     <div className={classes.root}>
       <div className={classes.nameRow}>
-        <Typography variant="h6" className={classes.name}>{item.name}</Typography>
+        <Typography variant="h6" className={classes.name}>
+          {item.name}
+        </Typography>
       </div>
       <div className={classes.container}>
         <Counter value={count} minValue={1} onChange={handleCountChange} />

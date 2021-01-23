@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
+import { createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from "uuid"
 
-export * from './selectors'
+export * from "./selectors"
 
 function getInitialState() {
   return {
     id: uuidv4(),
-    checkoutEmail: '',
+    checkoutEmail: "",
     checkoutInProgress: false,
     itemsCount: {},
     itemsList: [],
@@ -14,21 +14,21 @@ function getInitialState() {
 }
 
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState: getInitialState(),
   reducers: {
-    addItem (state, action) {
+    addItem(state, action) {
       const { id } = action.payload
       state.itemsCount[id] = (state.itemsCount[id] || 0) + 1
       state.itemsList = Object.keys(state.itemsCount).sort()
     },
-    setCheckoutEmail (state, action) {
+    setCheckoutEmail(state, action) {
       state.checkoutEmail = action.payload
     },
-    checkout (state, action) {
+    checkout(state, action) {
       state.checkoutInProgress = action.payload
     },
-    removeItem (state, action) {
+    removeItem(state, action) {
       const { id } = action.payload
       const itemCount = state.itemsCount[id]
       const itemExists = itemCount > 0

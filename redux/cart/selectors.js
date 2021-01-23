@@ -1,5 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit'
-import { itemByIdSelector } from '../itemsById'
+import { createSelector } from "@reduxjs/toolkit"
+import { itemByIdSelector } from "../itemsById"
 
 const TAXES_PERCENTAGE = 0.13
 
@@ -25,14 +25,15 @@ export const itemSubtotalSelector = createSelector(
 )
 
 export const subtotalAmountSelector = createSelector(
-  state => state,
+  (state) => state,
   itemsListSelector,
-  (state, itemsList) => roundTo(
-    itemsList
-      .map(id => itemSubtotalSelector(state, id))
-      .reduce((sum, amount) => sum + amount, 0),
-    2
-  )
+  (state, itemsList) =>
+    roundTo(
+      itemsList
+        .map((id) => itemSubtotalSelector(state, id))
+        .reduce((sum, amount) => sum + amount, 0),
+      2
+    )
 )
 
 export const taxesAmountSelector = createSelector(
@@ -47,12 +48,10 @@ export const totalAmountSelector = createSelector(
 )
 
 export const totalNumberOfItemsSelector = createSelector(
-  state => state,
+  (state) => state,
   itemsListSelector,
-  (state, itemsList) => itemsList
-    .map(id => itemCountSelector(state, id))
-    .reduce(
-      (totalNumberOfItems, count) => totalNumberOfItems + count,
-      0
-    )
+  (state, itemsList) =>
+    itemsList
+      .map((id) => itemCountSelector(state, id))
+      .reduce((totalNumberOfItems, count) => totalNumberOfItems + count, 0)
 )

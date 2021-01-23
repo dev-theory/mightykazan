@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fascinate&display=swap');
-@import url('https://fonts.cdnfonts.com/css/yataghan');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Fascinate&display=swap");
+@import url("https://fonts.cdnfonts.com/css/yataghan");
 
 html {
   /* font-size: 62.5%; */
@@ -22,24 +22,53 @@ a {
   box-sizing: border-box;
 }
 
-
 /* Color Theme Swatches in Hex */
-.clr-ash-hex { color: #565659; }
-.clr-lt-green-hex { color: #9FBF5A; }
-.clr-lt-orange-hex { color: #F28705; }
-.clr-orange-hex { color: #F27405; }
-.clr-dk-orange-hex { color: #BF4904; }
+.clr-ash-hex {
+  color: #565659;
+}
+.clr-lt-green-hex {
+  color: #9fbf5a;
+}
+.clr-lt-orange-hex {
+  color: #f28705;
+}
+.clr-orange-hex {
+  color: #f27405;
+}
+.clr-dk-orange-hex {
+  color: #bf4904;
+}
 
 /* Color Theme Swatches in RGBA */
-.clr-ash-rgba { color: rgba(86, 86, 89, 1); }
-.clr-lt-green-rgba { color: rgba(158, 191, 89, 1); }
-.clr-lt-orange-rgba { color: rgba(242, 135, 4, 1); }
-.clr-orange-rgba { color: rgba(242, 116, 4, 1); }
-.clr-dk-orange-rgba { color: rgba(191, 73, 4, 1); }
+.clr-ash-rgba {
+  color: rgba(86, 86, 89, 1);
+}
+.clr-lt-green-rgba {
+  color: rgba(158, 191, 89, 1);
+}
+.clr-lt-orange-rgba {
+  color: rgba(242, 135, 4, 1);
+}
+.clr-orange-rgba {
+  color: rgba(242, 116, 4, 1);
+}
+.clr-dk-orange-rgba {
+  color: rgba(191, 73, 4, 1);
+}
 
 /* Color Theme Swatches in HSLA */
-.clr-ash-hsla { color: hsla(240, 1, 34, 1); }
-.clr-lt-green-hsla { color: hsla(79, 44, 55, 1); }
-.clr-lt-orange-hsla { color: hsla(32, 95, 48, 1); }
-.clr-orange-hsla { color: hsla(28, 95, 48, 1); }
-.clr-dk-orange-hsla { color: hsla(22, 95, 38, 1); }
+.clr-ash-hsla {
+  color: hsla(240, 1, 34, 1);
+}
+.clr-lt-green-hsla {
+  color: hsla(79, 44, 55, 1);
+}
+.clr-lt-orange-hsla {
+  color: hsla(32, 95, 48, 1);
+}
+.clr-orange-hsla {
+  color: hsla(28, 95, 48, 1);
+}
+.clr-dk-orange-hsla {
+  color: hsla(22, 95, 38, 1);
+}

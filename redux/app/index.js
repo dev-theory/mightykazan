@@ -1,18 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
-export * from './selectors'
+import { createSlice } from "@reduxjs/toolkit"
+export * from "./selectors"
 
 const initialState = {
   scrollTo: 0,
-  currentScreen: '/'
+  currentScreen: "/",
 }
 
 export const appSlice = createSlice({
-  name: 'app',
+  name: "app",
   initialState,
   reducers: {
     scrollTo: (state, action) => ({
       ...state,
-      scrollTo: action.payload
+      scrollTo: action.payload,
     }),
     showScreen: (state, action) => ({
       ...state,
@@ -24,7 +24,7 @@ export const appSlice = createSlice({
 const { showScreen } = appSlice.actions
 
 export const showHome = () => (dispatch) => {
-  dispatch(showScreen('/'))
+  dispatch(showScreen("/"))
 }
 
 export const scrollTo = (offsetTop) => (dispatch) => {
@@ -33,14 +33,14 @@ export const scrollTo = (offsetTop) => (dispatch) => {
 }
 
 export const showCheckout = () => (dispatch) => {
-  dispatch(showScreen('/checkout'))
+  dispatch(showScreen("/checkout"))
 }
 
 export const showMenu = () => (dispatch) => {
-  dispatch(showScreen('/menu'))
+  dispatch(showScreen("/menu"))
 }
 export const showShoppingBag = () => (dispatch) => {
-  dispatch(showScreen('/shopping-bag'))
+  dispatch(showScreen("/shopping-bag"))
 }
 
 export default appSlice.reducer
