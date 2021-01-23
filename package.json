@@ -8,6 +8,12 @@
     "export": "next export",
     "start": "next start"
   },
+  "eslintConfig": {
+    "extends": [
+      "prettier",
+      "prettier/prettier"
+    ]
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -25,6 +31,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "prettier": "^2.2.1",
     "redux-devtools": "^3.7.0",
     "standardx": "^7.0.0"
