@@ -1,8 +1,10 @@
 import Divider from "@material-ui/core/Divider"
 import Grid from "@material-ui/core/Grid"
+import Link from "@material-ui/core/Link"
 import Typography from "@material-ui/core/Typography"
 import Footer from "../Footer"
 import VisibilityAnimator from "../VisibilityAnimator"
+import InstagramIcon from "../../public/images/instagram"
 import {
   section1Props,
   section2Props,
@@ -62,6 +64,18 @@ export default function About(props) {
               We use only quality ingredients. Based on the season we buy from
               local farmers to support local businesses.
             </Typography>
+          </VisibilityAnimator>
+          <VisibilityAnimator {...section1Props}>
+            <Divider className={classes.divider} />
+            <Typography variant="body1">Follow us on Instagram</Typography>
+            <VisibilityAnimator {...section2IconsProps}>
+              <Link href="https://www.instagram.com/mightykazan">
+                <InstagramIcon className={classes.iconPics} />
+              </Link>
+            </VisibilityAnimator>
+            <Link href="https://www.instagram.com/mightykazan">
+              @mightykazan
+            </Link>
           </VisibilityAnimator>
           <Footer classes={{ root: classes.footer }} />
         </Grid>

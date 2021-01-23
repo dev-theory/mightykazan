@@ -17,6 +17,16 @@ const theme = createMuiTheme({
         color: "#FFFFFF",
       },
     },
+    MuiLink: {
+      root: {
+        color: "#FFFFFF",
+        textDecoration: "underline",
+        fontWeight: "bold",
+      },
+      underlineHover: {
+        textDecoration: "underline",
+      },
+    },
     MuiOutlinedInput: {
       notchedOutline: {
         borderColor: `rgba(255,255,255,0.5)`,

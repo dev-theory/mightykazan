@@ -1,3 +1,4 @@
+import Link from "@material-ui/core/Link"
 import Typography from "@material-ui/core/Typography"
 import { useStyles } from "./styles"
 
@@ -8,10 +9,7 @@ export default function Footer(props) {
     <div className={classes.root}>
       <Typography variant="subtitle2">© {year} Mighty Kazan</Typography>
       <Typography variant="subtitle2">
-        built by{" "}
-        <a className={classes.devTheory} href="https://devtheory.com">
-          DevTheory Inc.
-        </a>
+        built by <Link href="https://devtheory.com">DevTheory Inc.</Link>
       </Typography>
     </div>
   )

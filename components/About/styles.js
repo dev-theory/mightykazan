@@ -14,13 +14,14 @@ export const useStyles = makeStyles((theme) => ({
   },
   divider: {
     width: "40%",
-    margin: "1rem auto",
+    margin: "2rem auto",
   },
   footer: {
     marginTop: "3rem",
   },
   iconPics: {
     margin: 7,
+    height: "52px",
     width: "52px",
   },
   logo: {
