@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { v4 as uuidv4 } from "uuid"
+import {
+  cartIdSelector,
+  checkoutEmailSelector,
+  itemsInCartSelector,
+  taxesAmountSelector,
+  totalAmountSelector,
+} from "./selectors"
 
 export * from "./selectors"
 
@@ -57,5 +64,24 @@ export const {
   removeItem,
   setCheckoutEmail,
 } = cartSlice.actions
+
+export const submitOrder = () => (dispatch, getState, api) => {
+  const orderId = cartIdSelector(getState())
+  const postalCode = google_tag_manager[
+    process.env.NEXT_PUBLIC_GTM_ID
+  ].dataLayer.get("postal_code")
+
+  return api.put(`/orders/${orderId}`, {
+    id: orderId,
+    currency: "CAD",
+    customer: {
+      email: checkoutEmailSelector(getState()),
+      postalCode,
+    },
+    items: itemsInCartSelector(getState()),
+    tax: taxesAmountSelector(getState()),
+    totalAmount: totalAmountSelector(getState()),
+  })
+}
 
 export default cartSlice.reducer

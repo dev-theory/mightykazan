@@ -20,7 +20,7 @@ const ecommerceItem = (item) => ({
   price: item.price,
 })
 
-const itemsInCart = createSelector(
+const itemsInCartSelector = createSelector(
   (state) => state,
   itemsListSelector,
   (state, itemsList) =>
@@ -35,7 +35,7 @@ export function addToCart(state, action) {
     dataLayer({
       event: "add_to_cart",
       ecommerce: {
-        items: itemsInCart(state),
+        items: itemsInCartSelector(state),
       },
     })
   }
@@ -49,7 +49,7 @@ export function purchase(state, action) {
         transaction_id: cartIdSelector(state),
         affiliation,
         currency,
-        items: itemsInCart(state),
+        items: itemsInCartSelector(state),
         tax: taxesAmountSelector(state),
         value: totalAmountSelector(state),
       },
@@ -62,7 +62,7 @@ export function removeFromCart(state, action) {
     dataLayer({
       event: "remove_from_cart",
       ecommerce: {
-        items: itemsInCart(state),
+        items: itemsInCartSelector(state),
       },
     })
   }
@@ -73,7 +73,7 @@ export function viewCart(state, action) {
     dataLayer({
       event: "view_cart",
       ecommerce: {
-        items: itemsInCart(state),
+        items: itemsInCartSelector(state),
       },
     })
   }

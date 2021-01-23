@@ -1,4 +1,3 @@
-import Button from "@material-ui/core/Button"
 import Divider from "@material-ui/core/Divider"
 import IconButton from "@material-ui/core/IconButton"
 import Slide from "@material-ui/core/Slide"
@@ -9,11 +8,15 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { isCheckoutOpenSelector, showHome } from "../../redux/app"
 import {
+  checkout,
   checkoutEmailSelector,
+  checkoutInProgressSelector,
   clear,
   setCheckoutEmail,
+  submitOrder,
 } from "../../redux/cart"
 import Footer from "../Footer"
+import ProgressButton from "../ProgressButton"
 import { useStyles } from "./styles"
 
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -24,8 +27,12 @@ export default function Checkout(props) {
   const email = useSelector(checkoutEmailSelector)
   const [emailError, setEmailError] = useState(false)
   const open = useSelector(isCheckoutOpenSelector)
+  const orderInProgress = useSelector(checkoutInProgressSelector)
 
-  const onClose = () => dispatch(showHome())
+  const onClose = () => {
+    dispatch(clear())
+    dispatch(showHome())
+  }
 
   const onEmailChange = (event) => {
     const { value } = event.target
@@ -33,13 +40,20 @@ export default function Checkout(props) {
     setEmailError(!value.length)
   }
 
-  const submit = () => {
-    if (!emailPattern.test(email)) {
-      setEmailError(true)
-      return
+  const submit = async () => {
+    try {
+      if (!emailPattern.test(email)) {
+        setEmailError(true)
+        return
+      }
+      dispatch(checkout(true))
+      await dispatch(submitOrder())
+      dispatch(checkout(false))
+      dispatch(clear())
+      dispatch(showHome())
+    } catch (error) {
+      dispatch(checkout(false))
     }
-    dispatch(clear())
-    dispatch(showHome())
   }
 
   const onEmailKeyPress = (event) => {
@@ -89,9 +103,13 @@ export default function Checkout(props) {
             />
           </div>
           <div>
-            <Button variant="outlined" onClick={submit}>
+            <ProgressButton
+              inProgress={orderInProgress}
+              variant="outlined"
+              onClick={submit}
+            >
               Send me the coupon
-            </Button>
+            </ProgressButton>
           </div>
         </div>
         <Footer />

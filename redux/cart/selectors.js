@@ -8,6 +8,9 @@ function roundTo(num, decimals = 0) {
   return Math.round(num * pow) / pow
 }
 
+const pick = (props) => (obj) =>
+  props.reduce((o, p) => ({ ...o, [p]: obj[p] }), {})
+
 export const cartIdSelector = ({ cart }) => cart.id
 
 export const checkoutEmailSelector = ({ cart }) => cart.checkoutEmail
@@ -17,6 +20,22 @@ export const checkoutInProgressSelector = ({ cart }) => cart.checkoutInProgress
 export const itemCountSelector = ({ cart }, id) => cart.itemsCount[id] || 0
 
 export const itemsListSelector = ({ cart }) => cart.itemsList
+
+export const itemsInCartSelector = createSelector(
+  (state) => state,
+  itemsListSelector,
+  (state, itemsList) =>
+    itemsList.reduce(
+      (map, id) => ({
+        ...map,
+        [id]: {
+          ...pick(["id", "name", "price"])(itemByIdSelector(state, id)),
+          quantity: itemCountSelector(state, id),
+        },
+      }),
+      {}
+    )
+)
 
 export const itemSubtotalSelector = createSelector(
   itemCountSelector,
