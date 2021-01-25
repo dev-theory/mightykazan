@@ -34,16 +34,9 @@ export default function About(props) {
             <Divider className={classes.divider} />
             <Typography variant="body1">
               We are proud to serve Toronto and the area. Our specialty is the
-              Central Asian{" "}
-              <em>
-                <strong>"Plov"</strong>
-              </em>{" "}
-              a rice dish simmered in a rich stew of meat and vegetables carrots
-              and onion. We cook our{" "}
-              <em>
-                <strong>plov</strong>
-              </em>{" "}
-              with firewood in a{" "}
+              Central Asian Pilaf a rice dish simmered in a rich stew of meat
+              and vegetables carrots and onion. We cook our pilaf with firewood
+              in a{" "}
               <em>
                 <strong>"Kazan"</strong>
               </em>{" "}

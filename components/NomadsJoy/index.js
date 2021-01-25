@@ -8,11 +8,8 @@ export default function NomadsJoy(props) {
     title2: "Joy",
     description: (
       <>
-        Treat yourself to the authentic{" "}
-        <em>
-          <strong>"Plov"</strong>
-        </em>{" "}
-        of nomads prepared with firewood in a cast iron{" "}
+        Treat yourself to the authentic pilaf of nomads prepared with firewood
+        in a cast iron{" "}
         <em>
           <strong>"Kazan"</strong>
         </em>{" "}

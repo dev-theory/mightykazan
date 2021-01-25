@@ -10,11 +10,7 @@ export default function ChickenPlov(props) {
     title2: "Grains",
     description: (
       <>
-        This amazing Chicken{" "}
-        <em>
-          <strong>Plov</strong>
-        </em>{" "}
-        is prepared with in a cast iron{" "}
+        This amazing Chicken Pilaf is prepared in a cast iron{" "}
         <em>
           <strong>"Kazan"</strong>
         </em>{" "}
